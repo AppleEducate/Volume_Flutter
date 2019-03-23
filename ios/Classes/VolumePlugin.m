@@ -1,20 +1,8 @@
 #import "VolumePlugin.h"
+#import <volume/volume-Swift.h>
 
 @implementation VolumePlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-  FlutterMethodChannel* channel = [FlutterMethodChannel
-      methodChannelWithName:@"volume"
-            binaryMessenger:[registrar messenger]];
-  VolumePlugin* instance = [[VolumePlugin alloc] init];
-  [registrar addMethodCallDelegate:instance channel:channel];
+  [SwiftVolumePlugin registerWithRegistrar:registrar];
 }
-
-- (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
-  if ([@"getPlatformVersion" isEqualToString:call.method]) {
-    result([@"iOS " stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
-  } else {
-    result(FlutterMethodNotImplemented);
-  }
-}
-
 @end
